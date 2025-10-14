@@ -1,0 +1,125 @@
+.categoryContainer {
+  display: flex;
+  overflow-x: auto;
+  gap: 1.5rem;
+  background-color: #0e0e0e;
+  padding: 0.2rem 1rem;
+  border-bottom: 1px solid #222;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.categoryContainer::-webkit-scrollbar {
+  display: none;
+}
+
+/* Card */
+.categoryCard {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: transparent;
+  scroll-snap-align: center;
+  transition: opacity 0.3s ease;
+}
+
+.categoryCard:hover {
+  transform: translateY(-4px); 
+}
+
+
+@keyframes categoryPulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); } 
+}
+
+/* Icon wrapper */
+.iconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  width: 80px;
+  position: relative;
+  transition: transform 0.15s ease-out, background-color 0.3s ease;
+}
+
+.categoryCard:hover .iconWrapper {
+    animation: categoryPulse 0.3s ease-out forwards;
+}
+
+
+.iconBg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    background-color: transparent;
+    opacity: 0;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: 80%; 
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: 80%; 
+}
+
+.categoryCard:hover .iconBg {
+    background-color: #a29f9f; 
+    
+}
+
+
+
+.icon {
+  z-index: 1;
+  transition: all 0.3s ease;
+  filter: brightness(0) invert(1); /* Default: white outline */
+}
+
+/* Hover: make SVG path fill change to black outline */
+.categoryCard:hover .icon {
+  filter: brightness(0) invert(0); /* turns black outline */
+}
+
+/* Label text */
+.label {
+  color: #9e9999;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+/* Hover text MUST be black to contrast with the new visual style */
+.categoryCard:hover .label {
+  color: #efeaea;
+}
+
+/* Responsive scaling — larger icons for desktop */
+@media (min-width: 1024px) {
+    .iconBg {
+        mask-size: 70%;
+        -webkit-mask-size: 70%;
+    }
+    .iconWrapper {
+      height: 120px;
+      width: 120px;
+    }
+
+    .icon {
+      width: 100px;
+      height: 100px;
+    }
+
+    .label {
+      font-size: 1rem;
+    }
+}
